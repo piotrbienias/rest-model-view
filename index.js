@@ -1,9 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _underscore = require('underscore');
@@ -27,7 +23,7 @@ var ModelView = function () {
     _classCallCheck(this, ModelView);
 
     this.server = server;
-    this.routingOptions = server.routingOptions ? server.routingOptions() : { };
+    this.routingOptions = server.routingOptions ? server.routingOptions() : {};
     this.model = model;
 
     this.tags = module ? ['api', module] : ['api'];
@@ -38,8 +34,6 @@ var ModelView = function () {
     value: function _handleSequelizeErrors(error) {
 
       var errorObject = {};
-
-      console.log(error);
 
       switch (error.name) {
         case 'SequelizeForeignKeyConstraintError':
@@ -219,9 +213,14 @@ var ModelView = function () {
     key: '_getPrimaryKeyWithSchema',
     value: function _getPrimaryKeyWithSchema(routeObject) {
       var primaryKeyField = this.model.primaryKeyField;
-      var schema = _underscore2.default.find(this.model.getSchema ? this.model.getSchema() : {}._inner.children, function (val, key) {
-        return val.key == primaryKeyField;
-      });
+      var schemaObject = this.model.getSchema ? this.model.getSchema() : null;
+
+      var schema = null;
+      if (schemaObject) {
+        schema = _underscore2.default.find(schemaObject._inner.children, function (val, key) {
+          return val.key == primaryKeyField;
+        });
+      }
 
       if (schema) {
         routeObject.config.validate.params[primaryKeyField] = schema.schema.required();
@@ -428,7 +427,6 @@ var ModelView = function () {
           handler: function handler(request, reply) {
             _this7.model.findById(request.params.id).then(function (instance) {
               if (instance) {
-                console.log(request.auth);
                 instance.destroy().then(function () {
                   reply({ message: _this7.model.name + ' was deleted' });
                 }).catch(function (err) {
