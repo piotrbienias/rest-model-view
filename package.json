@@ -1,0 +1,31 @@
+{
+  "name": "rest-model-view",
+  "version": "1.0.0",
+  "description": "Model view which can be used in REST web services built with Sequelize.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piotrbienias/rest-model-view.git"
+  },
+  "keywords": [
+    "REST",
+    "Hapi",
+    "Sequelize",
+    "Model",
+    "View"
+  ],
+  "author": "Piotr Bienias <piotr.bienias@blackballoon.pl> (http://www.blackballoon.pl)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/piotrbienias/rest-model-view/issues"
+  },
+  "homepage": "https://github.com/piotrbienias/rest-model-view#readme",
+  "dependencies": {
+    "boom": "^4.0.0",
+    "joi": "^9.0.4",
+    "underscore": "^1.8.3"
+  }
+}
