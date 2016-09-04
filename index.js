@@ -50,7 +50,7 @@ var ModelView = function() {
 		_classCallCheck(this, ModelView);
 
 		this.server = server;
-		this.routingOptions = server.routingOptions();
+		this.routingOptions = server.routingOptions() ? server.routingOptions() : { };
 		this.model = model;
 
 		this.tags = module ? ['api', module] : ['api'];
